@@ -4,7 +4,10 @@ const dotenv = require('dotenv').config()
 
 
 const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('./swagger.json')
+const sitemap = require('express-sitemap-html')
+
+// if you use swagger.json uncomment this.
+//const swaggerDocument = require('./swagger.json')
 
 const app = express()
 const port = 3000
@@ -125,9 +128,12 @@ app.put('/person/:id', async (request, response, next) => {
   if (updatedPerson ) response.json(updatedPerson)
   else response.status(404).end()
 })
-
+// way to make Swagger documentation with swagger.json
+/*
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+*/
 
+sitemap.swagger('Title', app) // this creates swagger to /api-docs from all of you routes
 
 
 app.listen(port, () => {
