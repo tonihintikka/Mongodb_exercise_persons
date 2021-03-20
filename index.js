@@ -4,7 +4,7 @@ const dotenv = require('dotenv').config()
 
 
 const swaggerUi = require('swagger-ui-express')
-swaggerDocument = require('./swagger.json')
+const swaggerDocument = require('./swagger.json')
 
 const app = express()
 const port = 3000
@@ -127,9 +127,7 @@ app.put('/person/:id', async (request, response, next) => {
 })
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.listen(port, () => { 
-  console.log('Example app listening on port 3000') 
-})
+
 
 
 app.listen(port, () => {

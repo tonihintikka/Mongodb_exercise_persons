@@ -1,0 +1,133 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Persons Project",
+    "description": "Persons Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Persons",
+      "description": "API for persons in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/person": {
+      "get": {
+          "tags": [
+            "Person"
+          ],
+          "summary": "Get all persons in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Person"
+              }
+            }
+          }
+        }
+    },
+    "/person/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of person that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Person"
+        ],
+        "summary": "Get person with given ID",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete person with given ID",
+        "tags": [
+          "Person"
+        ],
+        "responses": {
+          "200": {
+            "description": "Person is deleted",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": [
+          "Person"
+        ],
+        "parameters": [
+          {
+            "name": "person",
+            "in": "body",
+            "description": "Person with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Person is updated",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Person": {
+      "required": [
+        "name",
+        "age",
+        "email"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "age": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string",
+          "required": true,
+          "uniqueItems": true
+        }       
+      }
+    }   
+  }
+}
